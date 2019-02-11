@@ -73,7 +73,9 @@ COMMIT TRANSACTION;
 9.    Luke Smith, studentkey 19, was mistakenly give the grade 2.23 for the course with the roster key 1179. It should be 3.22. UPDATE Roster to the correct grade.
 BEGIN TRANSACTION;
 UPDATE roster
-SET finalgrade=3.22; 
+SET finalgrade=3.22
+WHERE studentkey=19
+AND rosterkey=1179; 
 COMMIT TRANSACTION;
 
 10.   Delete testcourse from the course table 
