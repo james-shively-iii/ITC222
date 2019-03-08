@@ -1,4 +1,4 @@
-1. Write the SQL to CREATE the location table. Run it to debug any errors
+--1. Write the SQL to CREATE the location table. Run it to debug any errors
 CREATE TABLE location(
 	locationkey SERIAL NOT NULL,
 	locationname TEXT NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE location(
 	CONSTRAINT location_pk PRIMARY KEY (locationkey)
 );
 
-2. Write the SQL to CREATE the seminar table. Run it to debug any errors.
+--2. Write the SQL to CREATE the seminar table. Run it to debug any errors.
 CREATE TABLE seminar(
 	seminarkey SERIAL NOT NULL,
 	locationkey INT NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE seminar(
 		ON DELETE NO ACTION
 );
 
-3. Write the SQL to create the seminardetails table, but don’t include the keys in the definition.  Run the code to debug for errors.
+--3. Write the SQL to create the seminardetails table, but don’t include the keys in the definition.  Run the code to debug for errors.
 CREATE TABLE seminardetails(
 	seminardetailkey SERIAL NOT NULL,
 	seminarkey INT NOT NULL,
@@ -36,11 +36,11 @@ CREATE TABLE seminardetails(
 	description TEXT
 );
 
-4. ALTER the seminardetails table to add the PRIMARY KEY.
+--4. ALTER the seminardetails table to add the PRIMARY KEY.
 ALTER TABLE seminardetails 
 ADD PRIMARY KEY (seminardetailkey);
 
-5. ALTER the seminardetails table to add the FOREIGN KEYS
+--5. ALTER the seminardetails table to add the FOREIGN KEYS
 ALTER TABLE seminardetails
 ADD CONSTRAINT seminarkey_fk FOREIGN KEY (seminarkey)
 	REFERENCES seminar(seminarkey);
@@ -48,7 +48,7 @@ ALTER TABLE seminardetails
 ADD CONSTRAINT instructorkey_fk FOREIGN KEY (instructorkey)
 	REFERENCES instructor(instructorkey);
 
-6. Write the SQL to create the attendance table. Run the code to debug any errors.
+--6. Write the SQL to create the attendance table. Run the code to debug any errors.
 CREATE TABLE attendance(
 	attendancekey SERIAL NOT NULL,
 	seminardetailkey INT NOT NULL,
@@ -64,15 +64,15 @@ CREATE TABLE attendance(
 		ON DELETE NO ACTION
 );
 
-7. ALTER the person table to add a BOOLEAN column “newsletter” the default is “true.”
+--7. ALTER the person table to add a BOOLEAN column “newsletter” the default is “true.”
 ALTER TABLE person 
 ADD newsletter BOOLEAN DEFAULT TRUE;
 
-8. Add a CHECK CONSTRAINT to the finalgrade column that sets the range between 0 and 4.
+--8. Add a CHECK CONSTRAINT to the finalgrade column that sets the range between 0 and 4.
 ALTER TABLE roster
 ADD CONSTRAINT chk_grade CHECK(finalgrade BETWEEN 0 AND 4);
 
-9. CREATE a TEMP table that contains all the students in roster that have a NULL grade.
+--9. CREATE a TEMP table that contains all the students in roster that have a NULL grade.
 CREATE TEMP TABLE nullgrade(
 	lastname TEXT,
 	firstname TEXT
@@ -87,5 +87,5 @@ INNER JOIN roster r
 ON r.studentkey=s.studentkey
 WHERE finalgrade IS NULL;
 
-10. DROP the TEMP table.
+--10. DROP the TEMP table.
 DROP TABLE nullgrade;

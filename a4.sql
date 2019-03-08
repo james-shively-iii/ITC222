@@ -1,22 +1,22 @@
-1. What are the course names for the courses in Certificate 3?
+--1. What are the course names for the courses in Certificate 3?
 SELECT coursename
 FROM course co
 INNER JOIN certificatecourse ce
 ON co.coursekey=ce.coursekey
 WHERE ce.certificatekey=3;
 
-2. Who were the people added first to the person table? (You could sort, but use a subquery. The MIN () function will return the earliest date)
+--2. Who were the people added first to the person table? (You could sort, but use a subquery. The MIN () function will return the earliest date)
 SELECT lastname || ', '  || firstname AS "Name", dateadded AS "Date"
 FROM person
 WHERE dateadded=
 	(SELECT MIN(dateadded) FROM person);
 
-3. Return all the students (just their key for now) who are not in any roster.
+--3. Return all the students (just their key for now) who are not in any roster.
 SELECT studentkey FROM student
 WHERE studentkey NOT IN
 	(SELECT studentkey FROM roster);
 
-4-5. Create a query using the roster table that returns these results. (I am only showing the top 6 results-there are actually 67 rows returned. 
+--4-5. Create a query using the roster table that returns these results. (I am only showing the top 6 results-there are actually 67 rows returned. 
 The field averaged is finalgrade. I rounded the results to two decimal points. I also removed all nulls with HAVING AVG(finalgrade) IS NOT NULL. 
 The difference is the grouped average subtracted from the total table average. A negative result means that the section grades were higher than 
 average, a positive result that they were below the school average.)
@@ -32,7 +32,7 @@ GROUP BY r.sectionkey, coursename
 HAVING AVG(finalgrade) IS NOT NULL
 ORDER BY r.sectionkey ASC; 
 
-6. Use a table expression to get the student key, last name, first name and email from all the   students in section 30.
+--6. Use a table expression to get the student key, last name, first name and email from all the   students in section 30.
 SELECT "last", "first", "email", "sk"
 FROM (SELECT lastname AS "last",
 	  	firstname AS "first",
@@ -49,7 +49,7 @@ FROM (SELECT lastname AS "last",
 ) AS section30
 WHERE "sk" = 30;
 
-7. Redo number 6 as a Common table expression.
+--7. Redo number 6 as a Common table expression.
 WITH "Section 30" AS 
 (
 	SELECT
@@ -69,7 +69,7 @@ SELECT "Name", "Email", "SK"
 FROM "Section 30"
 WHERE "SK" = 30;
 
-8. Create a Common table expression that shows each instructors name and specialty area.
+--8. Create a Common table expression that shows each instructors name and specialty area.
 WITH instructorspecialty AS
 (
 	SELECT 
@@ -88,7 +88,7 @@ SELECT "Name", "Specialty"
 FROM instructorspecialty
 GROUP BY "Name", "Specialty";
 
-9-10. Create a correlated subquery that shows which students had grades less than the average grades for each section.
+--9-10. Create a correlated subquery that shows which students had grades less than the average grades for each section.
 SELECT ROUND(AVG(finalgrade),2) AS "Final Grade", 
 studentkey AS "Student ID",
 sectionkey AS "Section ID"

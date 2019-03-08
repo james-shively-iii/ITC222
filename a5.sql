@@ -1,5 +1,5 @@
 
-1. Insert a new course called testcourse. It will be worth 0 credits and the description will simple say “this is a test.”
+--1. Insert a new course called testcourse. It will be worth 0 credits and the description will simple say “this is a test.”
 BEGIN TRANSACTION;
 
 CREATE SEQUENCE course_coursekey_seq START;
@@ -9,7 +9,7 @@ VALUES(nextval('course_coursekey_seq'), 'testcourse', 0, 'this is a test');
 
 COMMIT TRANSACTION;
 
-2-4. Add a new student:
+--2-4. Add a new student:
 Roberta Hernadez
 apt 101, 234 Nelson Street
 Seattle, WA 98122
@@ -33,7 +33,7 @@ WHERE personkey = 405
 GROUP BY firstname, lastname;
 COMMIT TRANSACTION;
 
-5-7.  Add a new instructor.
+--5-7.  Add a new instructor.
 Marylin Brenen
 1983 South Madison
 Seattle. WA, 98122
@@ -62,7 +62,7 @@ VALUES((SELECT instructionalareakey FROM instructionalarea WHERE instructionalar
 ,(SELECT instructorkey FROM instructor WHERE instructorkey=12));
 COMMIT TRANSACTION;
 
-8. Geraldine Clark (personkey 211) notified the school that her last name was wrong, It should be “Clarkston.” Also, her email should be geraldineclark@msn.com. Make those changes.
+--8. Geraldine Clark (personkey 211) notified the school that her last name was wrong, It should be “Clarkston.” Also, her email should be geraldineclark@msn.com. Make those changes.
 BEGIN TRANSACTION;
 UPDATE person
 SET lastname='Clarkston',
@@ -70,7 +70,7 @@ email='geraldineclark@msn.com'
 WHERE personkey=211;
 COMMIT TRANSACTION;
 
-9.    Luke Smith, studentkey 19, was mistakenly give the grade 2.23 for the course with the roster key 1179. It should be 3.22. UPDATE Roster to the correct grade.
+--9.    Luke Smith, studentkey 19, was mistakenly give the grade 2.23 for the course with the roster key 1179. It should be 3.22. UPDATE Roster to the correct grade.
 BEGIN TRANSACTION;
 UPDATE roster
 SET finalgrade=3.22
@@ -78,7 +78,7 @@ WHERE studentkey=19
 AND rosterkey=1179; 
 COMMIT TRANSACTION;
 
-10.   Delete testcourse from the course table 
+--10.   Delete testcourse from the course table 
 BEGIN TRANSACTION;
 DELETE FROM course WHERE coursename='testcourse';
 COMMIT TRANSACTION;
